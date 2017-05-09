@@ -5,7 +5,7 @@
                 <ul class="nav" id="main-menu">
 
                     <li class="active-link">
-                        <a href="index.php" ><i class="fa fa-desktop "></i>Dashboard</a>
+                        <a href="./dashboard.php" ><i class="fa fa-desktop "></i>Dashboard</a>
                     </li>
 
                     <li>

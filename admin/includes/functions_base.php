@@ -104,8 +104,6 @@ function getexcel_data($imagearray,$excel_path,$excell_extention){
     //Retrieving of the record from the excell starts here                                       
    while(($excel_filesop = fgetcsv($excel_file, 10000, ",")) !== false){
         $count++;
-        /*if($count == 1)
-            continue;*/
 
         //Excluding the first top 3 lines in the excell data
         if($count <= 3)
@@ -113,43 +111,33 @@ function getexcel_data($imagearray,$excel_path,$excell_extention){
 
         if(($datacount == $excel_filesop[3]))
         {
-            //$current_data .= $excel_filesop[0].','.$excel_filesop[1].','.$excel_filesop[2].','.$excel_filesop[3].','.$excel_filesop[4].','.$excel_filesop[5];
-            //continue;
-
             //Getting each of the data from each cell
-            $current_data .= implode (",",$excel_filesop);
+            $current_data = implode (",",$excel_filesop);
+            //Binding the excell data with each image
+            $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
         }
-        //Getting each of the data from each cell
-        //$current_data = $excel_filesop[0].','.$excel_filesop[1].','.$excel_filesop[2];
         
         else
         {
             if( !($datacount < $excel_filesop[3]))
             {
-                //$current_data .= $excel_filesop[0].','.$excel_filesop[1].','.$excel_filesop[2].','.$excel_filesop[3].','.$excel_filesop[4].','.$excel_filesop[5];
-                
                 //Getting each of the data from each cell
-                $current_data .= implode (",",$excel_filesop);
+                $current_data = implode (",",$excel_filesop);
+                //Binding the excell data with each image
+                $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
             }
             
         }
-        if($datacount >= $excel_filesop[3])
-                $current_data .=',';
 
         if ($excel_filesop[3] > $datacount)
         {
-            //Binding the excell data with each image
-            $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
             $imgcount++;
             $datacount++;
-            $current_data = "";
-            //$current_data .= $excel_filesop[0].','.$excel_filesop[1].','.$excel_filesop[2].','.$excel_filesop[3].','.$excel_filesop[4].','.$excel_filesop[5];
-            $current_data .= implode (",",$excel_filesop);
+            $current_data = implode (",",$excel_filesop);
+            //Binding the excell data with each image
+            $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
         }
     }
-        //Binding the excell data with each image
-        $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
-        //var_dump($master_arraydata);
         fclose($excel_file);//close the excell file
 
 return $master_arraydata;

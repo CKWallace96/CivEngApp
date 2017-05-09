@@ -46,7 +46,7 @@
                         async: false
                         }).responseText;
 
-                    var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+                    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
                     var next = document.getElementById('nextBtn');
                     var back = document.getElementById('backBtn');
                     
@@ -96,13 +96,10 @@
     </div>
             
     <div class="w3-content w3-display-container" id="slideshow">
-    <img class="mySlides" src="admin/assets/external_images/1493060874IMG_0024.jpg" style="width:100%">
-    <img class="mySlides" src="admin/assets/external_images/1493060874IMG_0025.jpg" style="width:100%">
-    <img class="mySlides" src="admin/assets/external_images/1493060874IMG_0026.jpg" style="width:100%">
-    <img class="mySlides" src="admin/assets/external_images/1493060874IMG_0027.jpg" style="width:100%">
-    <img class="mySlides" src="admin/assets/external_images/1493060874IMG_0028.jpg" style="width:100%">
-    <img class="mySlides" src="admin/assets/external_images/1493060874IMG_0029.jpg" style="width:100%">
-    <img class="mySlides" src="admin/assets/external_images/1493060874IMG_0030.jpg" style="width:100%">
+        
+    <?php
+        include 'getImages.php';
+    ?>
 
     <div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
         <div class="w3-left w3-padding-left w3-hover-text-khaki" id="backBtn">&#10094;</div>

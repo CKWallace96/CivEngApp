@@ -22,6 +22,7 @@
     $table = array();
     $organized_data = array();
     
+    //Layout of JSON Table
     $table['cols'] = array(
         array('label' => 'Time', 'type' => 'string'),
         array('label' => 'ImageURL', 'type' => 'string'),
@@ -42,6 +43,7 @@
       $raw_data_string = (string) $r['image_data']; 
       $data_array = explode(',', $raw_data_string);
 
+      //Store Data in Array
       $organized_data = array(
             'Time' => $data_array[0],
             'ImageURL' => (string) $r['image_url'],

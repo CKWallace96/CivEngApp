@@ -6,24 +6,26 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+    <!--This JavaScript Block is in charge of generating the GoogleChart-->
     <script type="text/javascript">
                 google.charts.load('current', {'packages':['corechart']});
                 google.charts.setOnLoadCallback(init);
 
                 function init() {
-                    var xaxis = 
-                    <?php 
-                        $x = isset($_GET['x']) ? $_GET['x'] : 'Step';
-                        echo "'".$x."'";
-                    ?>;
+                    var xaxis = //this variable specifies the X axis, the default value is Step
+                        <?php 
+                            $x = isset($_GET['x']) ? $_GET['x'] : 'Step';
+                            echo "'".$x."'";
+                        ?>;
 
-                    var yaxis = 
-                    <?php 
-                        $y = isset($_GET['y']) ? $_GET['y'] : 'Load';
-                        echo "'".$y."'";
-                    ?>;
+                    var yaxis = //this variable specifies the Y axis, the default value is Load
+                        <?php 
+                            $y = isset($_GET['y']) ? $_GET['y'] : 'Load';
+                            echo "'".$y."'";
+                        ?>;
 
-                    var options = {
+                    var options = { //Specifies the options for the Google Chart
                         title: 'Data Graph',
                         chartArea: {
                             width: '60%',
@@ -40,7 +42,7 @@
                     
                     };
 
-                    var jsonData = $.ajax({
+                    var jsonData = $.ajax({ //Grabs data from the database by calling data.php file
                         url: "data.php",
                         dataType: "json",
                         async: false
@@ -97,29 +99,16 @@
             
     <div class="w3-content w3-display-container" id="slideshow">
         
-    <?php
+    <?php //This PHP code executes and returns HTML code that specifies the location of the images
         include 'getImages.php';
     ?>
-
-    <div class="w3-center w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-        <div class="w3-left w3-padding-left w3-hover-text-khaki" id="backBtn">&#10094;</div>
-        <div class="w3-right w3-padding-right w3-hover-text-khaki" id="nextBtn">&#10095;</div>
-        
-        <span class="w3-badge demo w3-border w3-transparent"></span>
-        <span class="w3-badge demo w3-border w3-transparent"></span>
-        <span class="w3-badge demo w3-border w3-transparent"></span>
-        <span class="w3-badge demo w3-border w3-transparent"></span>
-        <span class="w3-badge demo w3-border w3-transparent"></span>
-        <span class="w3-badge demo w3-border w3-transparent"></span>
-        <span class="w3-badge demo w3-border w3-transparent"></span>
-    </div>
-    </div>
 
     <!--Div that will hold the pie chart-->
     <div id="chart_div"></div>
 
     <script type="text/javascript" src="js/slideshow.js"></script>
 
+    <!--This form is used for changing the Axis-->
     <form method="get" id="form">
         <select id="x" name="x">
             <option selected="true" disabled="disabled">Choose X-Axis</option>                  

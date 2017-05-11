@@ -94,6 +94,7 @@ function getexcel_data($imagearray,$excel_path,$excell_extention){
   $master_arraydata=array();
   $excel_filename =$excel_path;
   $path="assets/external_docs/";
+  
   if($excell_extention)
   {
     $excel_file = fopen($path.$excel_filename, "r");//to open the file in read mode
@@ -101,9 +102,12 @@ function getexcel_data($imagearray,$excel_path,$excell_extention){
     $imgcount=0;
     $datacount=0;
     $current_data = "";
+    
     //Retrieving of the record from the excell starts here                                       
-   while(($excel_filesop = fgetcsv($excel_file, 10000, ",")) !== false){
+   while(($excel_filesop = fgetcsv($excel_file, 0, ",")) !== false){
         $count++;
+        /*if($count == 1)
+            continue;*/
 
         //Excluding the first top 3 lines in the excell data
         if($count <= 3)
@@ -111,33 +115,44 @@ function getexcel_data($imagearray,$excel_path,$excell_extention){
 
         if(($datacount == $excel_filesop[3]))
         {
+            //$current_data .= $excel_filesop[0].','.$excel_filesop[1].','.$excel_filesop[2].','.$excel_filesop[3].','.$excel_filesop[4].','.$excel_filesop[5];
+            //continue;
+
             //Getting each of the data from each cell
-            $current_data = implode (",",$excel_filesop);
-            //Binding the excell data with each image
-            $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
+            $current_data .= implode (",",$excel_filesop);
         }
+        //Getting each of the data from each cell
+        //$current_data = $excel_filesop[0].','.$excel_filesop[1].','.$excel_filesop[2];
         
         else
         {
             if( !($datacount < $excel_filesop[3]))
             {
+                //$current_data .= $excel_filesop[0].','.$excel_filesop[1].','.$excel_filesop[2].','.$excel_filesop[3].','.$excel_filesop[4].','.$excel_filesop[5];
+                
                 //Getting each of the data from each cell
-                $current_data = implode (",",$excel_filesop);
-                //Binding the excell data with each image
-                $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
+                $current_data .= implode (",",$excel_filesop);
             }
             
         }
+        if($datacount >= $excel_filesop[3])
+                $current_data .=',';
 
         if ($excel_filesop[3] > $datacount)
         {
-            $imgcount++;
-            $datacount++;
-            $current_data = implode (",",$excel_filesop);
             //Binding the excell data with each image
             $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
+            $imgcount++;
+            $datacount++;
+            $current_data = "";
+            //$current_data .= $excel_filesop[0].','.$excel_filesop[1].','.$excel_filesop[2].','.$excel_filesop[3].','.$excel_filesop[4].','.$excel_filesop[5];
+            $current_data .= implode (",",$excel_filesop);
         }
     }
+        //Binding the excell data with each image
+        $master_arraydata[] = array('data' => $current_data, 'image' => $imagearray[$imgcount]);
+        $temp = $datacount + 1;
+        //var_dump($master_arraydata);
         fclose($excel_file);//close the excell file
 
 return $master_arraydata;
@@ -147,4 +162,3 @@ else
 }
 
 ?>
-

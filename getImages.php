@@ -4,7 +4,7 @@
     /* Database Host */
     $DB_HOST = 'localhost';
     $DB_USER = 'root';
-    $DB_PASS = 'zariaw12';
+    $DB_PASS = '*********';
     $DB_TABLE = 'image_url';
 
     /* Establish the database connection */

@@ -6,7 +6,7 @@
 
     /* Your Database User Name and Passowrd */
     $DB_USER = 'root';
-    $DB_PASS = 'zariaw12';
+    $DB_PASS = '**********';
 
     /* Establish the database connection */
     $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);

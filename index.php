@@ -43,7 +43,7 @@
                     };
 
                     var jsonData = $.ajax({ //Grabs data from the database by calling data.php file
-                        url: "data.php",
+                        url: "getData.php",
                         dataType: "json",
                         async: false
                         }).responseText;
